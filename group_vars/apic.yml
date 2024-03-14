@@ -1,0 +1,6 @@
+---
+# apic credentials
+username: "admin"
+password: ""
+# use python venv
+ansible_python_interpreter: $(which python)

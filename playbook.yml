@@ -1,0 +1,34 @@
+---
+- name: "PLAY: Create Static Bind"
+  hosts: apic
+  connection: local
+  gather_facts: false
+  vars:
+    apic_info: &apic_info
+      host: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: false
+  vars_files:
+    - policy_vars.yml
+
+
+  tasks:
+
+
+    - name: Create static bind
+      cisco.aci.aci_static_binding_to_epg:
+        <<: *apic_info
+        tenant: "{{ item.tnt }}"
+        ap: "{{ item.ap }}"
+        epg: "{{ item.epg }}"
+        encap_id: "{{ item.vlan }}"
+        deploy_immediacy: lazy
+        interface_mode: "{{ item.mode }}"
+        interface_type: "{{ item.type }}"
+        pod_id: "{{ item.pod }}"
+        leafs: "{{ item.leaf }}"
+        interface: "{{ item.eth }}"
+        annotation: ""
+        state: "{{ item.state }}"
+      loop: "{{ binding }}"

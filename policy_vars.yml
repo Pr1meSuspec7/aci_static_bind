@@ -1,0 +1,28 @@
+---
+# mode [ 802.1p | access | trunk ]
+# type [ port_channel | switch_port | vpc ]
+# leaf [ leaf_ID | for "type vpc" leaf_ID-leaf_ID (es. 101-102) ]
+# eth [ 1/10 | for "type vpc" use policy group name (es. vPC_server-X_PolGrp) ]
+
+binding:
+  - tnt: TEST
+    ap: TEST_ANP
+    epg: TEST_EPG
+    vlan: 1426
+    mode: trunk
+    type: vpc
+    pod: 1
+    leaf: 101-102
+    eth: vPC_TEST-1_PolGrp
+    state: present
+
+  - tnt: TEST
+    ap: TEST_ANP
+    epg: TEST_EPG
+    vlan: 1426
+    mode: trunk
+    type: vpc
+    pod: 1
+    leaf: 101-102
+    eth: vPC_TEST-2_PolGrp
+    state: present
